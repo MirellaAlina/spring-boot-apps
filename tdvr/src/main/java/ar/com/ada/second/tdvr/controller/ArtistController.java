@@ -54,16 +54,16 @@ public class ArtistController {
 
 //    @PutMapping({ "/{id}", "/{id}/" })
 //    public ResponseEntity putArtistByIdMethod() {
-//        return null;
+//        return null;  
 //    }
 
     @PatchMapping({ "/{id}", "/{id}/" })
     public ResponseEntity patchArtistByIdMethod(@RequestBody ArtistDTO dto, @PathVariable Long id) {
-        ArtistDTO artisUpdated = artistService.update(dto, id);
+        ArtistDTO artistUpdated = artistService.update(dto, id);
 
         return ResponseEntity
                 .ok()
-                .body(artisUpdated);
+                .body(artistUpdated);
     }
 
     @DeleteMapping({"/{id}", "/{id}/"})

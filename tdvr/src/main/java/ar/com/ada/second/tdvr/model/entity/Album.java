@@ -1,5 +1,6 @@
 package ar.com.ada.second.tdvr.model.entity;
 
+import ar.com.ada.second.tdvr.model.mapper.converter.YearAttributeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Year;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -14,17 +17,24 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "album")
-public class Album implements Serializable {
+@Table(name = "Album")
+public class    Album implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
-    private String name;
+    @Column(nullable = false)
+    private String title;
 
-    @Column(nullable = false, length = 4)
-    private Integer year;
+    @Convert(converter = YearAttributeConverter.class)
+    @Column(nullable = false)
+    private Year released;
 
+    @ManyToOne
+    @JoinColumn(name = "Artist_id", nullable = false, foreignKey = @ForeignKey(name = "fk_Album_Artist"))
+    private Artist artist;
+
+    @OneToMany(mappedBy = "album")
+    private List<Track> tracks;
 }

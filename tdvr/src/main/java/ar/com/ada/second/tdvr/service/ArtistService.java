@@ -47,7 +47,7 @@ public class ArtistService implements Services<ArtistDTO, Artist> {
     @Override
     public List<ArtistDTO> getAll() {
 
-        // llamar al repositorio y pedirle que haga la consulta a la BD de todos los registro de de esa entidad
+        // llamar al repositorio y pedirle que haga la consulta a la BD de todos los registros de esa entidad
         List<Artist> artistList = artistRepository.findAll();// => select * from
 
         // convertir esa lista de DAO a una lista de DTO
